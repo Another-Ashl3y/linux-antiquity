@@ -2,13 +2,13 @@
 
 #  Linux Antiquity 
 
-<img src="./screenshots/happy_sun.png" width="6%">
+<img src="./screenshots/happy_sun.png" width="8%">
 
 </div>
 
 <div align="center">
 
- **Linux Antiquity is a highly tasteful Linux-theme, reminiscent of art-nouveau and old drawings related to astronomy, science, and mythology.** 
+ **A highly tasteful, customizable & feature-rich Linux-theme reminiscent of art-nouveau and old drawings related to astronomy, science, and mythology.** 
 
 </div>
 
@@ -21,23 +21,44 @@
 
 </div>
 
-### IMPORTANT NOTICE ⚠️
-This theme is first and foremost an art project whcih entails that as of version 0.1 the main focus was to get a proof of concept done and ready for my video about this theme, so **INSTALL AND USE AT YOUR OWN RISK!**
+![image](./screenshots/1.png)
+![image](./screenshots/2.png)
+![image](./screenshots/3.png)
 
-A lot of the code, a **large** portion will be refactored post version 0.1, and a lot of designs may change and be improved.
 
-Performance of the UI was not a concern as of version 0.1, but regardless it runs well for me. Just keep in mind that it isn't optimized yet.
+| theme picker                       | 
+| ---------------------------------- | 
+| ![image](./screenshots/theme_picker.png) |
+|                                    |                                   
 
-If you intend to use this theme, do subscribe/follow this repo to be notified of any updates. I recommend installing the latest version of the theme often.
+| weather widgets                     |                                    |
+| ----------------------------------  | ---------------------------------- |
+| ![image](./screenshots/hot.png)|![image](./screenshots/phlegmatic.png)|
+|                                     |          
 
-I'm quite busy, but I will try to improve and update this theme as much as I can since I will be using this as my main theme.
+
+
+*And much more...* Wallpapers can be found in my [wallpapers repo](https://github.com/diinki/wallpapers).
+
+___
+
+> [!CAUTION]
+> This theme is first and foremost an art project which entails that as of version 0.1 the main focus was to get a proof of concept done and ready for my video about this theme, so **INSTALL AND USE AT YOUR OWN RISK!**
+>
+>A lot of the code, a **large** portion will be refactored post version 0.1, and a lot of .>designs may change and be improved.
+>
+>Performance of the UI was not a concern as of version 0.1, but regardless it runs well for me. >Just keep in mind that it isn't optimized yet.
+>
+>If you intend to use this theme, do subscribe/follow this repo to be notified of any updates. >I recommend installing the latest version of the theme often from the releases page.
+>
+>I'm quite busy, but I will try to improve and update this theme as much as I can since I will >be using this as my main theme.
 ____
 
 ### Dependencies 📦
 The install script should notify you if anything is missing.
 
 **Required Software:**
-* `Hyprland` (>0.55)
+* `Hyprland` (>0.55) - we use lua now!
 * `Hyprpaper` *For wallpapers*
 * `Quickshell` (>0.3.0)
 * `Kitty` *Terminal configs use by default*
@@ -49,6 +70,22 @@ The install script should notify you if anything is missing.
 **Recommended Software:**
 * `nwg-look` To easily set icon theme, gtk theme, cursors etc
 * `dconf` & `dconf-editor` To easily set environment variables related to the theme.
+
+### Editing crucial sections ⚠️
+Things such as Monitor details, wallpaper directories, and also creating an open weather map account for weather widget data, have to be done yourself.
+
+Edit `.config/hypr/hyprland.lua`, `.config/hypr/hyprpaper.conf`
+to set monitor details, I've commented the files in a detailed manner so it shouldn't be hard to figure this out.
+
+For weather widgets, simply open the settings menu of the theme using the left side-bar buttons.
+
+You'll be able to see where to input open weather map details. Its free and lets you use the beautiful weather widget!
+
+> [!NOTE]
+> Open weather map is lovely! They provide more than enough free API calls and great data that is used by the theme weather widgets.
+
+> [!NOTE]
+> I am considering creating a settings tab specifically for setting monitor data, in order to reduce the amount of config file editing, do look forward to that!
 
 ### Setting quickshell-specific Icon Themes 🎨
 You can find and use your own icon theme, but you will need to customize the top lines of code in the `.config/quickshell/shell.qml` directory to set the icon theme in the quickshell UI specifically. Namely:
@@ -77,4 +114,23 @@ This theme does require some manual config file editing in order to setup wallpa
 I've made a set of kitty terminal themes that match each relevant theme that comes with Linux Antiquity by default.
 
 I might also make a more detailed installation guide video later on, I'll link that here should I make one.
+
+### Default keybinds *️⃣
+You can edit and view the default keybinds in `.config/hypr/hyprland.lua`.
+These are just my personal preferences, so feel entirely free to edit them.
+
+> [!NOTE]
+> I might make editing keybinds part of the settings menu in the future, along with other things you'd usually edit config files manually for!
+
+- `mod` = the super key, (the windows key, as some people refer to it as). You can re-bind mod to something else if you wish.
+
+- `mod` + `Enter` = launch terminal.
+- `mod` + `D` = open application launcher popup.
+- `mod` + `[any number, 1-9]` = switch focus to the workspace equivalent to the number.
+- `mod` + `Shift` + ` [any number, 1-9]` = move the focused/hovered window to the workspace equivalent to the number.
+- `mod` + `Shift` + ` Space` = toggle floating mode for the focused/hovered window.
+- `mod` + ` Q` = Exit/Kill the focused window.
+- `mod` + `F` = toggle full-screen mode for the focused window.
+- `mod` + `Right Mouse Button` = re-size a window
+- `mod` + `Left Mouse Button` = move a window
 
