@@ -1,0 +1,7 @@
+[terminal]
+shell="/bin/zsh"
+
+[window]
+
+padding = { x=6, y=6 }
+opacity = 0.5

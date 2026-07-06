@@ -11,19 +11,17 @@ BACKUP_DIR="$HOME/${USERNAME}_BACKUPS"
 CONFIG_DIR="$HOME/.config"
 THEME_CONFIGS="./configs"
 
-DEPS=("hyprpaper" "nemo" "kitty" "quickshell" "hyprshot" "mako" "jq" "socat")
+DEPS=("hyprpaper" "nemo" "alacritty" "quickshell" "hyprshot" "mako" "jq" "socat")
 WINDOW_MANAGER="Hyprland"
 
 print_txt() {
-    echo -e "${2}${1}${NC}"
+  echo -e "${2}${1}${NC}"
 }
-
 
 echo "
 "
 print_txt "【 Welcome to the Linux Antiquity installation/update Process. 】" "$GREEN"
 print_txt " _________________________________________" "$GREEN"
-
 
 echo
 print_txt "Verifiying existence of dependencies..." "$YELLOW"
@@ -31,32 +29,32 @@ missing_deps=()
 
 # Best way to do this? Unsure if this has high compat
 for dep in "${DEPS[@]}"; do
-    if command -v "$dep" >/dev/null 2>&1 ; then
-        print_txt "✓ $dep - Found." "$GREEN"
-    else
-        missing_deps+=("$dep")
-        print_txt "✗ $dep - Not Found!" "$RED"
-    fi
+  if command -v "$dep" >/dev/null 2>&1; then
+    print_txt "✓ $dep - Found." "$GREEN"
+  else
+    missing_deps+=("$dep")
+    print_txt "✗ $dep - Not Found!" "$RED"
+  fi
 done
 
 if [ ${#missing_deps[@]} -gt 0 ]; then
-    echo
-    print_txt "Missing dependencies: ${missing_deps[*]}" "$RED"
-    print_txt "Please install the required dependencies, and then run this script again." "$RED"
-    
-    # Some hints bcz we're nice.
-    if command -v apt &> /dev/null; then
-        print_txt "Hint: sudo apt install ${missing_deps[*]}" "$YELLOW"
-    elif command -v pacman &> /dev/null; then
-        print_txt "Hint: sudo pacman -S ${missing_deps[*]}" "$YELLOW"
-    fi
-    
-    exit 1
+  echo
+  print_txt "Missing dependencies: ${missing_deps[*]}" "$RED"
+  print_txt "Please install the required dependencies, and then run this script again." "$RED"
+
+  # Some hints bcz we're nice.
+  if command -v apt &>/dev/null; then
+    print_txt "Hint: sudo apt install ${missing_deps[*]}" "$YELLOW"
+  elif command -v pacman &>/dev/null; then
+    print_txt "Hint: sudo pacman -S ${missing_deps[*]}" "$YELLOW"
+  fi
+
+  exit 1
 fi
 
 if [ ! -d "$THEME_CONFIGS" ]; then
-    print_txt "Error: Corrupt repository! '$THEME_CONFIGS' not found! Please re-install Antiquity. Exiting." "$RED"
-    exit 1
+  print_txt "Error: Corrupt repository! '$THEME_CONFIGS' not found! Please re-install Antiquity. Exiting." "$RED"
+  exit 1
 fi
 
 # Create backup directory if it doesn't exist
@@ -66,30 +64,30 @@ echo
 print_txt "Copying configs for programs..." "$YELLOW"
 
 # A bit messy, here we copy all config dirs and also detect if we need to create a backup of something.
-for dir in "$THEME_CONFIGS"/*/ ; do
-    if [ -d "$dir" ]; then
-        dirname=$(basename "$dir")
-        target_dir="$CONFIG_DIR/$dirname"
-        
-        # Create backup if a directory already exists.
-        if [ -d "$target_dir" ]; then
-            backup_target="$BACKUP_DIR/$dirname"
-            print_txt "Backing up existing $dirname to $backup_target" "$YELLOW"
-            
-            # Append timestamp to backup, in case of multiple backups existing.
-            if [ -d "$backup_target" ]; then
-                timestamp=$(date +"%Y%m%d_%H%M%S")
-                backup_target="${backup_target}_${timestamp}"
-            fi
-            
-            mv "$target_dir" "$backup_target"
-            print_txt "✓ Backed up $dirname" "$GREEN"
-        fi
-        
-        # Copy config.
-        cp -r "$dir" "$target_dir"
-        print_txt "✓ Copied $dirname to ~/.config/" "$GREEN"
+for dir in "$THEME_CONFIGS"/*/; do
+  if [ -d "$dir" ]; then
+    dirname=$(basename "$dir")
+    target_dir="$CONFIG_DIR/$dirname"
+
+    # Create backup if a directory already exists.
+    if [ -d "$target_dir" ]; then
+      backup_target="$BACKUP_DIR/$dirname"
+      print_txt "Backing up existing $dirname to $backup_target" "$YELLOW"
+
+      # Append timestamp to backup, in case of multiple backups existing.
+      if [ -d "$backup_target" ]; then
+        timestamp=$(date +"%Y%m%d_%H%M%S")
+        backup_target="${backup_target}_${timestamp}"
+      fi
+
+      mv "$target_dir" "$backup_target"
+      print_txt "✓ Backed up $dirname" "$GREEN"
     fi
+
+    # Copy config.
+    cp -r "$dir" "$target_dir"
+    print_txt "✓ Copied $dirname to ~/.config/" "$GREEN"
+  fi
 done
 
 echo
@@ -97,7 +95,7 @@ print_txt "All configurations have been installed to ~/.config/" "$GREEN"
 print_txt "Make sure to move the icon theme manually to ~/.local/share/icons if you want to use the provided icon theme." "$GREEN"
 
 if [ "$(ls -A $BACKUP_DIR 2>/dev/null)" ]; then
-    print_txt "Backups of existing files have been created in: $BACKUP_DIR" "$YELLOW"
+  print_txt "Backups of existing files have been created in: $BACKUP_DIR" "$YELLOW"
 fi
 
 echo

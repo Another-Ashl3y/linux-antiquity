@@ -4,14 +4,10 @@
 -- Make sure to customize monitors! This is just my setup which I've left in so you get an idea.
 -- Run `hyprctl monitors all` to see all your available monitors!
 
-hl.monitor({ output = "DP-2", mode = "1920x1080@144.00", position = "0x250",  scale = 1 })
-hl.monitor({ output = "DP-4", mode = "2560x1440@164.84", position = "1920x0", scale = 1 })
-
-
 --                             DEFAULT PROGRAMS
 -- ██████████████████████████████████████████████████████████████████████████
 -- These are the default programs I use, do change them if you have other preferences.
-local terminal    = "kitty"
+local terminal    = "alacritty"
 local fileManager = "nemo"
 
 
@@ -47,7 +43,7 @@ hl.env("HYPRCURSOR_SIZE", "24")
 hl.config({
     input = {
         -- Switch keyboard language layout with: alt + shift
-        kb_layout  = "us,se",
+        kb_layout  = "gb",
         kb_options = "grp:alt_shift_toggle",
 
         kb_rules   = "",
@@ -91,11 +87,11 @@ hl.animation({ leaf = "fade",       enabled = true, speed = 3, bezier = "smooth"
 hl.config({
     general = {
         -- Inner and outer gaps between windows.
-        gaps_in  = 4,
-        gaps_out = 8,
+        gaps_in  = 6,
+        gaps_out = 12,
 
         -- I prefer a thin border.
-        border_size = 1,
+        border_size = 4,
 
         -- Border colors.
         col = {
@@ -180,7 +176,7 @@ local mainMod = "SUPER" -- Windows / Super key is the main modifier.
 -- mod + Enter       -> start terminal
 hl.bind(mainMod .. " + Return",        hl.dsp.exec_cmd(terminal))
 -- mod + Q           -> kill focused application
-hl.bind(mainMod .. " + Q",             hl.dsp.window.close())
+hl.bind(mainMod .. " + SHIFT + Q",             hl.dsp.window.close())
 -- mod + SHIFT + S   -> screenshot a region (requires hyprshot)
 hl.bind(mainMod .. " + SHIFT + S",     hl.dsp.exec_cmd("hyprshot --mode region --output-folder /tmp"))
 -- mod + E           -> open file manager
@@ -219,3 +215,4 @@ hl.bind("XF86MonBrightnessDown", hl.dsp.exec_cmd("brightnessctl s 10%-"),       
 -- Blur windows according to the linux antiquity theme
 hl.layer_rule({ match = { namespace = "diinki_celestialantiquity:bars" },    blur = true, ignore_alpha = 0.19 })
 hl.layer_rule({ match = { namespace = "diinki_celestialantiquity:no_blur" }, blur = true, ignore_alpha = 0.19 })
+hl.bind(mainMod .. " + M", hl.dsp.exec_cmd("command -v hyprshutdown >/dev/null 2>&1 && hyprshutdown || hyprctl dispatch 'hl.dsp.exit()'"))
